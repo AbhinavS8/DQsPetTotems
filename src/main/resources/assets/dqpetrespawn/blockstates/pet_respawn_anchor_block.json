@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "dqpetrespawn:block/pet_respawn_block" }
+    "": { "model": "dqpetrespawn:block/pet_respawn_anchor_block" }
   }
 }

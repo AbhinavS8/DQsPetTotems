@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "dqpetrespawn:block/pet_respawn_block"
+    "all": "dqpetrespawn:block/pet_respawn_anchor_block"
   }
 }

@@ -2,6 +2,7 @@ package net.dominosq.dqpetrespawn.block;
 
 import net.dominosq.dqpetrespawn.DQPetRespawn;
 //import net.dominosq.dqpetrespawn.block.custom.PetRespawnAnchorBlock;
+import net.dominosq.dqpetrespawn.block.custom.PetRespawnAnchorBlock;
 import net.dominosq.dqpetrespawn.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -19,8 +20,8 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(DQPetRespawn.MODID);
 
-//    public static final DeferredBlock<Block> PET_RESPAWN_ANCHOR_BLOCK = registerBlock("pet_respawn_anchor_block",
-//            () -> new PetRespawnAnchorBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final DeferredBlock<Block> PET_RESPAWN_ANCHOR_BLOCK = registerBlock("pet_respawn_anchor_block",
+            () -> new PetRespawnAnchorBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock("bismuth_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 4),

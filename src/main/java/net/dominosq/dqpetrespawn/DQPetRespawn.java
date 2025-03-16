@@ -4,6 +4,7 @@ package net.dominosq.dqpetrespawn;
 //import net.dominosq.dqpetrespawn.block.ModBlocks;
 //import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
 import net.dominosq.dqpetrespawn.block.ModBlocks;
+import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
 import net.dominosq.dqpetrespawn.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class DQPetRespawn
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         ModBlocks.register(modEventBus);
-//        ModBlockEntities.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);
 
         // Register the item to a creative tab
@@ -56,11 +57,11 @@ public class DQPetRespawn
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-//        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-//            event.accept(ModBlocks.PET_RESPAWN_ANCHOR_BLOCK.get());
-//        }
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.PET_RESPAWN_ANCHOR_BLOCK.get());
+        }
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-//            event.accept(ModBlocks.BISMUTH_ORE);
+            event.accept(ModBlocks.BISMUTH_ORE);
         }
     }
 
