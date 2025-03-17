@@ -1,4 +1,5 @@
 {
   "block.dqpetrespawn.pet_respawn_anchor_block": "Pet Respawn Anchor",
-  "block.dqpetrespawn.bismuth_ore":"Bismuth Ore"
+  "block.dqpetrespawn.bismuth_ore":"Bismuth Ore",
+  "item.dqpetrespawn.pet_charm_item": "Pet Charm"
   }
