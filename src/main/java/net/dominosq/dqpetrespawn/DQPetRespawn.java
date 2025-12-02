@@ -1,4 +1,4 @@
-package net.dominosq.dqpetrespawn;
+    package net.dominosq.dqpetrespawn;
 
 //import net.dominosq.dqpetrespawn.item.ModItems;
 //import net.dominosq.dqpetrespawn.block.ModBlocks;
@@ -9,7 +9,7 @@ import net.dominosq.dqpetrespawn.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
 
-import com.mojang.logging.LogUtils;
+//import com.mojang.logging.LogUtils;
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -29,7 +29,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 public class DQPetRespawn
 {
     public static final String MODID = "dqpetrespawn";
-    private static final Logger LOGGER = LogUtils.getLogger();
+//    private static final Logger LOGGER = LogUtils.getLogger();
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
