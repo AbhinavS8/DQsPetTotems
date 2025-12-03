@@ -15,6 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,49 +28,9 @@ public class PetCharmItem extends Item {
         super(properties);
     }
 
-    @Override
-    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand usedHand) {
-        if (!player.level().isClientSide) {
-            if (isTamedPet(target)) {
-                player.displayClientMessage(Component.literal("Pet linked!"), true);
-                CompoundTag tag = new CompoundTag();
-                target.save(tag);  // or the newer data components API
-                player.displayClientMessage(Component.literal(tag.toString()), true);
 
 
-                try {
-                    // 3. Choose the file path
-                    Path outPath = Path.of("debug", "entity_dump.txt");
 
-                    // Ensure debug directory exists
-                    Files.createDirectories(outPath.getParent());
-
-                    // 4. Write the text to the file
-                    Files.writeString(outPath, tag.toString());
-
-                    // Notify the player (server sends to client)
-                    player.displayClientMessage(
-                            Component.literal("NBT dumped to debug/entity_dump.txt"),
-                            false
-                    );
-
-                } catch (IOException e) {
-                    player.displayClientMessage(
-                            Component.literal("Failed to write NBT dump: " + e.getMessage()),
-                            false
-                    );
-                    e.printStackTrace();
-                }
-
-                return InteractionResult.SUCCESS;
-            } else {
-                player.displayClientMessage(Component.literal("This entity cannot be linked."), true);
-                return InteractionResult.FAIL;
-            }
-
-        }
-        return InteractionResult.PASS;
-    }
 
 
 //    @Override
@@ -102,14 +63,23 @@ public class PetCharmItem extends Item {
 
 //    }
 
-    private boolean isTamedPet(LivingEntity entity) {
-        // Example: Allow cats, dogs, and parrots to be linked
-        return entity.getType() == EntityType.WOLF ||
-                entity.getType() == EntityType.CAT ||
-                entity.getType() == EntityType.PARROT;
+//    private boolean isTamedPet(LivingEntity entity) {
+//        // Example: Allow cats, dogs, and parrots to be linked
+//        return entity.getType() == EntityType.WOLF ||
+//                entity.getType() == EntityType.CAT ||
+//                entity.getType() == EntityType.PARROT;
+//    }
+
+    public void handlePetClick(ItemStack stack, Player player, LivingEntity pet) {
+        if (!player.level().isClientSide) {
+            player.displayClientMessage(
+                    Component.literal("Pet linked: " + pet.getUUID()),
+                    false
+            );
+
+            // TODO: Save your UUID / NBT / data component here
+        }
     }
-
-
 
 
 }
