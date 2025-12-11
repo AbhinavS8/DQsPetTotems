@@ -44,5 +44,6 @@ public class ModEvents {
         }
 
         ((PetCharmItem) stack.getItem()).handlePetClick(stack, player, living);
+
     }
 }

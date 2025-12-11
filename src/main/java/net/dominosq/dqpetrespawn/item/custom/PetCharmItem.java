@@ -1,5 +1,6 @@
 package net.dominosq.dqpetrespawn.item.custom;
 
+import net.dominosq.dqpetrespawn.init.ModAttachments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -29,55 +30,23 @@ public class PetCharmItem extends Item {
     }
 
 
-
-
-
-
-//    @Override
-//    public InteractionResult useOn(UseOnContext context) {
-//        if (this.hasStoredEntity(context.getItemInHand())) {
-//            Level level = context.getLevel();
-//            if (level.isClientSide) {
-//                return InteractionResult.SUCCESS;
-//            } else {
-//                ItemStack itemInHand = context.getItemInHand();
-//                BlockPos blockPos = context.getClickedPos();
-//                Direction direction = context.getClickedFace();
-//                BlockState blockState = level.getBlockState(blockPos);
-//
-//                BlockPos releasePos;
-//                if (blockState.getCollisionShape(level, blockPos).isEmpty()) {
-//                    releasePos = blockPos;
-//                } else {
-//                    releasePos = blockPos.relative(direction);
-//                }
-//
-//                this.releaseContents(context.getPlayer(), level, itemInHand, blockPos, releasePos);
-//                this.tryConvertPickUpTime(level, itemInHand);
-//
-//                return InteractionResult.CONSUME;
-//            }
-//        } else {
-//            return InteractionResult.PASS;
-//        }
-
-//    }
-
-//    private boolean isTamedPet(LivingEntity entity) {
-//        // Example: Allow cats, dogs, and parrots to be linked
-//        return entity.getType() == EntityType.WOLF ||
-//                entity.getType() == EntityType.CAT ||
-//                entity.getType() == EntityType.PARROT;
-//    }
-
     public void handlePetClick(ItemStack stack, Player player, LivingEntity pet) {
         if (!player.level().isClientSide) {
-            player.displayClientMessage(
-                    Component.literal("Pet linked: " + pet.getUUID()),
-                    false
-            );
+            if (!pet.getData(ModAttachments.PET_HAS_CHARM.get())) {
+                // TODO: consume item logic?
+                pet.setData(ModAttachments.PET_HAS_CHARM.get(), true);
+                player.displayClientMessage(
+                        Component.literal("Pet linked: " + pet.getUUID()),
+                        false
+                );
+            }
+            else {
+                player.displayClientMessage(
+                        Component.literal("Pet already linked vro"),
+                        false
+                );
+            }
 
-            // TODO: Save your UUID / NBT / data component here
         }
     }
 

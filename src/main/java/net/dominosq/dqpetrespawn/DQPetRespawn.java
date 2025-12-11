@@ -5,6 +5,7 @@
 //import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
 import net.dominosq.dqpetrespawn.block.ModBlocks;
 import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
+import net.dominosq.dqpetrespawn.init.ModAttachments;
 import net.dominosq.dqpetrespawn.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
@@ -44,7 +45,7 @@ public class DQPetRespawn
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);
-
+        ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
