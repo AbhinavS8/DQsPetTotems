@@ -36,7 +36,7 @@ public class PetCharmItem extends Item {
                 // TODO: consume item logic?
                 pet.setData(ModAttachments.PET_HAS_CHARM.get(), true);
                 player.displayClientMessage(
-                        Component.literal("Pet linked: " + pet.getUUID()),
+                        Component.literal("Pet linked: " + pet.getName().getString()),
                         false
                 );
             }

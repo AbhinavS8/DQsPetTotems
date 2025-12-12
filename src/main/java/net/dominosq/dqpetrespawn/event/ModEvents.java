@@ -3,9 +3,16 @@ package net.dominosq.dqpetrespawn.event;
 import net.dominosq.dqpetrespawn.DQPetRespawn;
 import net.dominosq.dqpetrespawn.init.ModAttachments;
 import net.dominosq.dqpetrespawn.item.custom.PetCharmItem;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,14 +36,11 @@ public class ModEvents {
 
         if (!(target instanceof LivingEntity living)) return;
 
-        // Must be a tameable animal
-        if (!(living instanceof TamableAnimal tamable)) return;
+        // MUST be an OwnableEntity (covers all tamed pets + horses)
+        if (!(living instanceof OwnableEntity ownable)) return;
 
-        // Must be tamed
-        if (!tamable.isTame()) return;
-
-        // (Optional but recommended) Must be owned by this player
-        if (!tamable.isOwnedBy(player)) {
+        // Check ownership
+        if (ownable.getOwnerUUID() == null || !ownable.getOwnerUUID().equals(player.getUUID())) {
             if (!player.level().isClientSide) {
                 player.displayClientMessage(
                         Component.literal("You are not the owner of this pet."),
@@ -45,6 +49,8 @@ public class ModEvents {
             }
             return;
         }
+        event.setCanceled(true);
+        event.setCancellationResult(InteractionResult.SUCCESS);
 
         ((PetCharmItem) stack.getItem()).handlePetClick(stack, player, living);
 
@@ -56,51 +62,55 @@ public class ModEvents {
         float damage = event.getAmount();
         float currentHealth = target.getHealth();
 
-        if (!(target instanceof TamableAnimal pet)) return;
-        if (!pet.isTame()) return;
+        // MUST be an ownable (player-owned) pet/mount
+        if (!(target instanceof OwnableEntity ownable)) return;
+        if (ownable.getOwnerUUID() == null) return;
 
-        // get owner (may be null)
-        if (pet.getOwner() == null) return;
-        if (!(pet.getOwner() instanceof Player owner)) return;
+        // Must have a player owner
+        Entity ownerEntity = ownable.getOwner();
+        if (!(ownerEntity instanceof Player owner)) return;
+
+        // Lethal check
         if (damage < currentHealth) return;
 
-        if (pet.getData(ModAttachments.PET_HAS_CHARM.get())) {
+        if (target.getData(ModAttachments.PET_HAS_CHARM.get())) {
             owner.displayClientMessage(
-                    Component.literal("Your charm saved " + pet.getName().getString() + "!"),
+                    Component.literal("Your charm saved " + target.getName().getString() + "!"),
                     false
             );
             event.setCanceled(true);      // cancel the damage event
-            pet.setHealth(5.0F);
-            pet.setData(ModAttachments.PET_HAS_CHARM.get(), false);
+            target.setHealth(1.0F);
+            target.setData(ModAttachments.PET_HAS_CHARM.get(), false);
 
-            pet.level().playSound(
+            target.level().playSound(
                     null,                     // null = play for everyone nearby
-                    pet.getX(),
-                    pet.getY(),
-                    pet.getZ(),
-                    net.minecraft.sounds.SoundEvents.ENCHANTMENT_TABLE_USE,
-                    net.minecraft.sounds.SoundSource.PLAYERS,
-                    1.0F, 1.2F
+                    target.getX(),
+                    target.getY(),
+                    target.getZ(),
+                    SoundEvents.TOTEM_USE,
+                    SoundSource.PLAYERS,
+                    0.2F, 1.3F
             );
 
             // Spawn particles
-            for (int i = 0; i < 20; i++) {
-                double dx = (pet.level().random.nextDouble() - 0.5) * 0.5;
-                double dy = pet.level().random.nextDouble() * 0.5 + 0.2;
-                double dz = (pet.level().random.nextDouble() - 0.5) * 0.5;
+            if (target.level().isClientSide()) {
+                for (int i = 0; i < 20; i++) {
+                    double dx = (target.level().random.nextDouble() - 0.5) * 0.5;
+                    double dy = target.level().random.nextDouble() * 0.5 + 0.2;
+                    double dz = (target.level().random.nextDouble() - 0.5) * 0.5;
 
-                pet.level().addParticle(
-                        net.minecraft.core.particles.ParticleTypes.HEART,
-                        pet.getX() + dx,
-                        pet.getY() + dy + 0.5,
-                        pet.getZ() + dz,
-                        0, 0, 0
-                );
+                    target.level().addParticle(
+                            ParticleTypes.HEART,
+                            target.getX() + dx,
+                            target.getY() + dy + 0.5,
+                            target.getZ() + dz,
+                            0, 0, 0
+                    );
+                }
             }
-
             // Brief glowing effect (2 seconds)
-            pet.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                    net.minecraft.world.effect.MobEffects.GLOWING,
+            target.addEffect(new MobEffectInstance(
+                    MobEffects.GLOWING,
                     40,   // duration in ticks (40 ticks = 2 seconds)
                     0,
                     false,
