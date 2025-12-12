@@ -26,7 +26,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 public class ModEvents {
 
     @SubscribeEvent
-    public static void onRightClickPet(PlayerInteractEvent.EntityInteractSpecific event) {
+    public static void onRightClickPet(PlayerInteractEvent.EntityInteract event) {
 
         ItemStack stack = event.getItemStack();
         if (!(stack.getItem() instanceof PetCharmItem)) return;
@@ -89,13 +89,32 @@ public class ModEvents {
                     target.getZ(),
                     SoundEvents.TOTEM_USE,
                     SoundSource.PLAYERS,
-                    0.2F, 0.9F
+                    0.2F, 0.5F
             );
 
             // Spawn particles
             target.level().broadcastEntityEvent(target, (byte) 35);
 
-            // Brief glowing effect (2 seconds)
+            // Brief glowing effect (2 seconds) and other totem stuff
+            target.removeAllEffects();
+
+            target.addEffect(new MobEffectInstance(
+                    MobEffects.REGENERATION,
+                    900,
+                    1      // level II = amplifier 1
+            ));
+
+            target.addEffect(new MobEffectInstance(
+                    MobEffects.FIRE_RESISTANCE,
+                    800,
+                    0
+            ));
+
+            target.addEffect(new MobEffectInstance(
+                    MobEffects.ABSORPTION,
+                    100,
+                    1
+            ));
             target.addEffect(new MobEffectInstance(
                     MobEffects.GLOWING,
                     40,   // duration in ticks (40 ticks = 2 seconds)
@@ -103,7 +122,6 @@ public class ModEvents {
                     false,
                     false
             ));
-            // TODO: TP to safe place logic?
         }
     }
 }
