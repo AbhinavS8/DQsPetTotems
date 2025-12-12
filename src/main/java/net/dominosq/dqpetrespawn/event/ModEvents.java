@@ -36,7 +36,7 @@ public class ModEvents {
 
         if (!(target instanceof LivingEntity living)) return;
 
-        // MUST be an OwnableEntity (covers all tamed pets + horses)
+        // MUST be an OwnableEntity
         if (!(living instanceof OwnableEntity ownable)) return;
 
         // Check ownership
@@ -89,25 +89,12 @@ public class ModEvents {
                     target.getZ(),
                     SoundEvents.TOTEM_USE,
                     SoundSource.PLAYERS,
-                    0.2F, 1.3F
+                    0.2F, 0.9F
             );
 
             // Spawn particles
-            if (target.level().isClientSide()) {
-                for (int i = 0; i < 20; i++) {
-                    double dx = (target.level().random.nextDouble() - 0.5) * 0.5;
-                    double dy = target.level().random.nextDouble() * 0.5 + 0.2;
-                    double dz = (target.level().random.nextDouble() - 0.5) * 0.5;
+            target.level().broadcastEntityEvent(target, (byte) 35);
 
-                    target.level().addParticle(
-                            ParticleTypes.HEART,
-                            target.getX() + dx,
-                            target.getY() + dy + 0.5,
-                            target.getZ() + dz,
-                            0, 0, 0
-                    );
-                }
-            }
             // Brief glowing effect (2 seconds)
             target.addEffect(new MobEffectInstance(
                     MobEffects.GLOWING,
