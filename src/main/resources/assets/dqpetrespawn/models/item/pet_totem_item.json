@@ -1,6 +1,6 @@
 {
 "parent": "minecraft:item/generated",
 "textures": {
-"layer0": "dqpetrespawn:item/pet_charm_item"
+"layer0": "dqpetrespawn:item/pet_totem_item"
 }
 }

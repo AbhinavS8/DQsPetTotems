@@ -2,8 +2,7 @@ package net.dominosq.dqpetrespawn.event;
 
 import net.dominosq.dqpetrespawn.DQPetRespawn;
 import net.dominosq.dqpetrespawn.init.ModAttachments;
-import net.dominosq.dqpetrespawn.item.custom.PetCharmItem;
-import net.minecraft.core.particles.ParticleTypes;
+import net.dominosq.dqpetrespawn.item.custom.PetTotemItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,12 +12,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
@@ -29,7 +26,7 @@ public class ModEvents {
     public static void onRightClickPet(PlayerInteractEvent.EntityInteract event) {
 
         ItemStack stack = event.getItemStack();
-        if (!(stack.getItem() instanceof PetCharmItem)) return;
+        if (!(stack.getItem() instanceof PetTotemItem)) return;
 
         Player player = event.getEntity();
         Entity target = event.getTarget();
@@ -52,7 +49,7 @@ public class ModEvents {
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
 
-        ((PetCharmItem) stack.getItem()).handlePetClick(stack, player, living);
+        ((PetTotemItem) stack.getItem()).handlePetClick(stack, player, living);
 
     }
 
@@ -73,14 +70,14 @@ public class ModEvents {
         // Lethal check
         if (damage < currentHealth) return;
 
-        if (target.getData(ModAttachments.PET_HAS_CHARM.get())) {
+        if (target.getData(ModAttachments.PET_HAS_TOTEM.get())) {
             owner.displayClientMessage(
-                    Component.literal("Your charm saved " + target.getName().getString() + "!"),
+                    Component.literal("Your totem saved " + target.getName().getString()),
                     false
             );
             event.setCanceled(true);      // cancel the damage event
             target.setHealth(1.0F);
-            target.setData(ModAttachments.PET_HAS_CHARM.get(), false);
+            target.setData(ModAttachments.PET_HAS_TOTEM.get(), false);
 
             target.level().playSound(
                     null,                     // null = play for everyone nearby
@@ -105,6 +102,12 @@ public class ModEvents {
             ));
 
             target.addEffect(new MobEffectInstance(
+                    MobEffects.DAMAGE_RESISTANCE,
+                    20,
+                    255      // level II = amplifier 1
+            ));
+
+            target.addEffect(new MobEffectInstance(
                     MobEffects.FIRE_RESISTANCE,
                     800,
                     0
@@ -117,7 +120,7 @@ public class ModEvents {
             ));
             target.addEffect(new MobEffectInstance(
                     MobEffects.GLOWING,
-                    40,   // duration in ticks (40 ticks = 2 seconds)
+                    80,   // duration in ticks (40 ticks = 2 seconds)
                     0,
                     false,
                     false

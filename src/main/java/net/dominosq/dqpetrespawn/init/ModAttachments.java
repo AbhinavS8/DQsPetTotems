@@ -11,8 +11,8 @@ public class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, DQPetRespawn.MODID);
 
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> PET_HAS_CHARM =
-            ATTACHMENT_TYPES.register("pet_has_charm",
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> PET_HAS_TOTEM =
+            ATTACHMENT_TYPES.register("pet_has_totem",
                     () -> AttachmentType.builder(() -> false)    // default value = false
                             .serialize(Codec.BOOL)               // persist across world saves
                             .build()

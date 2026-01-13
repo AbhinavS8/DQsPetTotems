@@ -3,8 +3,6 @@
 //import net.dominosq.dqpetrespawn.item.ModItems;
 //import net.dominosq.dqpetrespawn.block.ModBlocks;
 //import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
-import net.dominosq.dqpetrespawn.block.ModBlocks;
-import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
 import net.dominosq.dqpetrespawn.init.ModAttachments;
 import net.dominosq.dqpetrespawn.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -42,8 +40,6 @@ public class DQPetRespawn
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
-        ModBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);
         ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
         // Register the item to a creative tab
@@ -58,12 +54,7 @@ public class DQPetRespawn
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.PET_RESPAWN_ANCHOR_BLOCK.get());
-        }
-        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.BISMUTH_ORE);
-        }
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
