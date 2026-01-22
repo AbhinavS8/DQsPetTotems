@@ -13,7 +13,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> PET_TOTEM_ITEM = ITEMS.register("pet_totem_item",
             () -> new PetTotemItem(new Item.Properties()
-                    .stacksTo(4)
+                    .stacksTo(16)
                     .rarity(Rarity.UNCOMMON)));
 
     public static void register(IEventBus eventBus) {
