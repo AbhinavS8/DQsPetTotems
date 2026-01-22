@@ -97,14 +97,14 @@ public class ModEvents {
 
             target.addEffect(new MobEffectInstance(
                     MobEffects.REGENERATION,
-                    900,
-                    1      // level II = amplifier 1
+                    100,
+                    3      // level II = amplifier 1
             ));
 
             target.addEffect(new MobEffectInstance(
                     MobEffects.DAMAGE_RESISTANCE,
-                    20,
-                    255      // level II = amplifier 1
+                    100,
+                    4      // level II = amplifier 1
             ));
 
             target.addEffect(new MobEffectInstance(
@@ -115,12 +115,12 @@ public class ModEvents {
 
             target.addEffect(new MobEffectInstance(
                     MobEffects.ABSORPTION,
-                    100,
-                    1
+                    800,
+                    2
             ));
             target.addEffect(new MobEffectInstance(
                     MobEffects.GLOWING,
-                    80,   // duration in ticks (40 ticks = 2 seconds)
+                    100,   // duration in ticks (40 ticks = 2 seconds)
                     0,
                     false,
                     false

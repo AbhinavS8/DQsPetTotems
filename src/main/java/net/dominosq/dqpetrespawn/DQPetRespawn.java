@@ -54,7 +54,9 @@ public class DQPetRespawn
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
+        if (event.getTabKey()==CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.PET_TOTEM_ITEM);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
