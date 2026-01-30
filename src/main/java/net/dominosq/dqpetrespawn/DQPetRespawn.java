@@ -3,9 +3,12 @@
 //import net.dominosq.dqpetrespawn.item.ModItems;
 //import net.dominosq.dqpetrespawn.block.ModBlocks;
 //import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
+import net.dominosq.dqpetrespawn.event.ModClientEvents;
+import net.dominosq.dqpetrespawn.event.ModEvents;
 import net.dominosq.dqpetrespawn.init.ModAttachments;
 import net.dominosq.dqpetrespawn.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 //import com.mojang.logging.LogUtils;
@@ -44,6 +47,12 @@ public class DQPetRespawn
         ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+
+        ModEvents.register();
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            ModClientEvents.register();
+        }
+
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -66,11 +75,11 @@ public class DQPetRespawn
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-
-        }
-    }
+//    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+//    public static class ClientModEvents {
+//        @SubscribeEvent
+//        public static void onClientSetup(FMLClientSetupEvent event) {
+//
+//        }
+//    }
 }

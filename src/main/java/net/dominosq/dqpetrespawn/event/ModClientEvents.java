@@ -9,12 +9,15 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderNameTagEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.TriState;
 
-@EventBusSubscriber(modid = DQPetRespawn.MODID, bus = EventBusSubscriber.Bus.GAME, value =  Dist.CLIENT)
 public class ModClientEvents {
 
-    @SubscribeEvent
+    public static void register() {
+        NeoForge.EVENT_BUS.addListener(ModClientEvents::onRenderTotemPetNameTag);
+    }
+
     public static void onRenderTotemPetNameTag(RenderNameTagEvent event) {
         Entity entity = event.getEntity();
 

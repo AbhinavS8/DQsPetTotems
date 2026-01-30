@@ -16,13 +16,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@EventBusSubscriber(modid = DQPetRespawn.MODID,bus = EventBusSubscriber.Bus.GAME)
 public class ModEvents {
 
-    @SubscribeEvent
+
+    public static void register() {
+        NeoForge.EVENT_BUS.addListener(ModEvents::onRightClickPet);
+        NeoForge.EVENT_BUS.addListener(ModEvents::onPetTakeDamage);
+    }
+
     public static void onRightClickPet(PlayerInteractEvent.EntityInteract event) {
 
         ItemStack stack = event.getItemStack();
@@ -53,7 +58,6 @@ public class ModEvents {
 
     }
 
-    @SubscribeEvent
     public static void onPetTakeDamage(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         float damage = event.getAmount();
