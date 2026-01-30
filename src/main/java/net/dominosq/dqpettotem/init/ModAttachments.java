@@ -1,7 +1,7 @@
-package net.dominosq.dqpetrespawn.init;
+package net.dominosq.dqpettotem.init;
 
 import com.mojang.serialization.Codec;
-import net.dominosq.dqpetrespawn.DQPetRespawn;
+import net.dominosq.dqpettotem.DQPetTotem;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
-            DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, DQPetRespawn.MODID);
+            DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, DQPetTotem.MODID);
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> PET_HAS_TOTEM =
             ATTACHMENT_TYPES.register("pet_has_totem",

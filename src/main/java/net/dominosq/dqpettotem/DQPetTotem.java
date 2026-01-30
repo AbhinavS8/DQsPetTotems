@@ -1,15 +1,14 @@
-    package net.dominosq.dqpetrespawn;
+    package net.dominosq.dqpettotem;
 
 //import net.dominosq.dqpetrespawn.item.ModItems;
 //import net.dominosq.dqpetrespawn.block.ModBlocks;
 //import net.dominosq.dqpetrespawn.block.entity.ModBlockEntities;
-import net.dominosq.dqpetrespawn.event.ModClientEvents;
-import net.dominosq.dqpetrespawn.event.ModEvents;
-import net.dominosq.dqpetrespawn.init.ModAttachments;
-import net.dominosq.dqpetrespawn.item.ModItems;
+import net.dominosq.dqpettotem.event.ModClientEvents;
+import net.dominosq.dqpettotem.event.ModEvents;
+import net.dominosq.dqpettotem.init.ModAttachments;
+import net.dominosq.dqpettotem.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.fml.loading.FMLEnvironment;
-import org.slf4j.Logger;
 
 //import com.mojang.logging.LogUtils;
 
@@ -17,25 +16,23 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+//import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
-@Mod(DQPetRespawn.MODID)
-public class DQPetRespawn
+@Mod(DQPetTotem.MODID)
+public class DQPetTotem
 {
-    public static final String MODID = "dqpetrespawn";
+    public static final String MODID = "dqpettotem";
 //    private static final Logger LOGGER = LogUtils.getLogger();
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public DQPetRespawn(IEventBus modEventBus, ModContainer modContainer) {
+    public DQPetTotem(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 
@@ -54,7 +51,7 @@ public class DQPetRespawn
         }
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+//        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

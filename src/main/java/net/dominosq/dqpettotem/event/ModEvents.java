@@ -1,8 +1,7 @@
-package net.dominosq.dqpetrespawn.event;
+package net.dominosq.dqpettotem.event;
 
-import net.dominosq.dqpetrespawn.DQPetRespawn;
-import net.dominosq.dqpetrespawn.init.ModAttachments;
-import net.dominosq.dqpetrespawn.item.custom.PetTotemItem;
+import net.dominosq.dqpettotem.init.ModAttachments;
+import net.dominosq.dqpettotem.item.custom.PetTotemItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,8 +13,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;

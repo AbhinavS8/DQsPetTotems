@@ -1,13 +1,9 @@
-package net.dominosq.dqpetrespawn.event;
+package net.dominosq.dqpettotem.event;
 
-import net.dominosq.dqpetrespawn.DQPetRespawn;
-import net.dominosq.dqpetrespawn.init.ModAttachments;
+import net.dominosq.dqpettotem.init.ModAttachments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderNameTagEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.TriState;
