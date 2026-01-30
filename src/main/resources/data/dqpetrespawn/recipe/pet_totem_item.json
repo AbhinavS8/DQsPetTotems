@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    " B ",
+    "EBE",
     "BTB",
-    " B "
+    "BBB"
   ],
   "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
     "B": {
-      "item": "minecraft:bone"
+      "item": "minecraft:gold_ingot"
     },
     "T": {
-      "item": "minecraft:totem_of_undying"
+      "item": "minecraft:soul_sand"
     }
   },
   "result": {

@@ -98,13 +98,13 @@ public class ModEvents {
 
             target.addEffect(new MobEffectInstance(
                     MobEffects.REGENERATION,
-                    100,
+                    200,
                     3      // level II = amplifier 1
             ));
 
             target.addEffect(new MobEffectInstance(
                     MobEffects.DAMAGE_RESISTANCE,
-                    100,
+                    200,
                     4      // level II = amplifier 1
             ));
 
@@ -117,7 +117,7 @@ public class ModEvents {
             target.addEffect(new MobEffectInstance(
                     MobEffects.ABSORPTION,
                     800,
-                    2
+                    4
             ));
             target.addEffect(new MobEffectInstance(
                     MobEffects.GLOWING,
